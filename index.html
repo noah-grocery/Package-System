@@ -1,53 +1,59 @@
 <div>Add Number</div>
-<div><input type="number" id="add"><button onclick="addNumber(document.getElementById('add').value); document.getElementById('add').value=null; ">Add</button></div>
-<div>Remove Number</div><div>
-<input type="number" id="inp"><button onclick="setNumber(document.getElementById('inp').value); document.getElementById('inp').value=null;">
-Remove</div>
+<div><input type="number" id="add"><button
+        onclick="addNumber(document.getElementById('add').value); document.getElementById('add').value=null; ">Add</button>
+</div>
+<div>Remove Number</div>
+<div>
+    <input type="number" id="inp"><button
+        onclick="setNumber(document.getElementById('inp').value); document.getElementById('inp').value=null;">
+        Remove
+</div>
 </button>
 <div id="setNumberBox">
 
 </div>
 <script>
     function inArray(needle, haystack) {
-    var length = haystack.length;
-    for(var i = 0; i < length; i++) {
-        if(haystack[i] == needle) return true;
+        var length = haystack.length;
+        for (var i = 0; i < length; i++) {
+            if (haystack[i] == needle) return true;
+        }
+        return false;
     }
-    return false;
-}
-function rand(min, max) {  
-  return Math.floor(Math.random() * (max - min + 1) + min)
-}
-const randomNumbers=new Array();
-
-function splashNumbers(){
-document.getElementById('setNumberBox').innerHTML='<b>'+randomNumbers.join('</b><br><b>')+'</b>';
-}
-splashNumbers();
-function addNumber(v){
- if(!inArray(v,randomNumbers)){randomNumbers.push(v)
- splashNumbers();
- }
-}
-function setNumber(v){
-var found,key=0;
-for(var i=0; i<randomNumbers.length; i++){if(randomNumbers[i]==v){found=true; key=i;}}
-if(found){
-randomNumbers.splice(key,1);
-splashNumbers();
-}
-document.getElementById("add").addEventListener("keyup", function(event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        document.getElementById("add").click();
+    function rand(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min)
     }
-});
+    const randomNumbers = new Array();
 
-document.getElementById("inp").addEventListener("keyup", function(event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        document.getElementById("inp").click();
+    function splashNumbers() {
+        document.getElementById('setNumberBox').innerHTML = '<b>' + randomNumbers.join('</b><br><b>') + '</b>';
     }
-});
+    splashNumbers();
+    function addNumber(v) {
+        if (!inArray(v, randomNumbers)) {
+            randomNumbers.push(v)
+            splashNumbers();
+        }
+    }
+    function setNumber(v) {
+        var found, key = 0;
+        for (var i = 0; i < randomNumbers.length; i++) { if (randomNumbers[i] == v) { found = true; key = i; } }
+        if (found) {
+            randomNumbers.splice(key, 1);
+            splashNumbers();
+        }
+        document.getElementById("add").addEventListener("keyup", function (event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                document.getElementById("add").click();
+            }
+        });
 
+        document.getElementById("inp").addEventListener("keyup", function (event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                document.getElementById("inp").click();
+            }
+    });
+    }
 </script>
