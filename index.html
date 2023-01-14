@@ -42,16 +42,5 @@
             randomNumbers.splice(key, 1);
             splashNumbers();
         }
-        document.getElementById("add").addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) {
-        document.querySelector("button[onclick='addNumber(document.getElementById(\'add\').value); document.getElementById(\'add\').value=null; ']").click();
-    }
-});
-
-document.getElementById("inp").addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) {
-        document.querySelector("button[onclick='setNumber(document.getElementById(\'inp\').value); document.getElementById(\'inp\').value=null;']").click();
-    }
-});
-    }
+      
 </script>
