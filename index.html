@@ -1,40 +1,64 @@
 <div>Add Number</div>
-<div><input type="number" id="add"><button onclick="addNumber(document.getElementById('add').value); document.getElementById('add').value=null; ">Add</button></div>
-<div>Remove Number</div><div>
-<input type="number" id="inp"><button onclick="setNumber(document.getElementById('inp').value); document.getElementById('inp').value=null;">
-Remove</div>
-</button>
-<div id="setNumberBox">
-
+<div>
+  <input type="number" id="add" onkeydown="handleEnter(event, 'addButton')">
+  <button id="addButton" onclick="addNumber(document.getElementById('add').value); document.getElementById('add').value=null;">Add</button>
 </div>
+
+<div>Remove Number</div>
+<div>
+  <input type="number" id="inp" onkeydown="handleEnter(event, 'removeButton')">
+  <button id="removeButton" onclick="setNumber(document.getElementById('inp').value); document.getElementById('inp').value=null;">Remove</button>
+</div>
+
+<div id="setNumberBox"></div>
+
 <script>
-   function inArray(needle, haystack) {
+  // Function to handle Enter key press
+  function handleEnter(event, buttonId) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      document.getElementById(buttonId).click(); // Trigger the associated button click event
+    }
+  }
+
+  function inArray(needle, haystack) {
     var length = haystack.length;
-    for(var i = 0; i < length; i++) {
-        if(haystack[i] == needle) return true;
+    for (var i = 0; i < length; i++) {
+      if (haystack[i] == needle) return true;
     }
     return false;
-}
-function rand(min, max) {  
-  return Math.floor(Math.random() * (max - min + 1) + min)
-}
-const randomNumbers=new Array();
+  }
 
-function splashNumbers(){
-document.getElementById('setNumberBox').innerHTML='<b>'+randomNumbers.join('</b><br><b>')+'</b>';
-}
-splashNumbers();
-function addNumber(v){
- if(!inArray(v,randomNumbers)){randomNumbers.push(v)
- splashNumbers();
- }
-}
-function setNumber(v){
-var found,key=0;
-for(var i=0; i<randomNumbers.length; i++){if(randomNumbers[i]==v){found=true; key=i;}}
-if(found){
-randomNumbers.splice(key,1);
-splashNumbers();
-}
-}
+  function rand(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
+  const randomNumbers = new Array();
+
+  function splashNumbers() {
+    document.getElementById('setNumberBox').innerHTML = '<b>' + randomNumbers.join('</b><br><b>') + '</b>';
+  }
+  splashNumbers();
+
+  function addNumber(v) {
+    if (!inArray(v, randomNumbers)) {
+      randomNumbers.push(v);
+      splashNumbers();
+    }
+  }
+
+  function setNumber(v) {
+    var found, key = 0;
+    for (var i = 0; i < randomNumbers.length; i++) {
+      if (randomNumbers[i] == v) {
+        found = true;
+        key = i;
+      }
+    }
+    if (found) {
+      randomNumbers.splice(key, 1);
+      splashNumbers();
+    }
+  }
 </script>
+
